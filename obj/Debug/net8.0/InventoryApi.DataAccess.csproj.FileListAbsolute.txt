@@ -15,3 +15,4 @@
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/ref/InventoryApi.DataAccess.dll
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.runtimeconfig.json
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.genruntimeconfig.cache
+/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.sourcelink.json
