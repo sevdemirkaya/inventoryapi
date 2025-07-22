@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InventoryApi.DataAccess")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1c7d2f34c1301bb1f7008fba14c0cd2f69e7887a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bd05c86af40f9cc07851bf2eeff8febc4766a177")]
 [assembly: System.Reflection.AssemblyProductAttribute("InventoryApi.DataAccess")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InventoryApi.DataAccess")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
