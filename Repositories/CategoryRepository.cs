@@ -7,12 +7,26 @@ namespace InventoryApi.DataAccess.Repositories;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly AppDbContext _context;
-    public async Task<Category?> GetByIdAsync(Guid id) => await _context.Categories.FindAsync(id);
 
+    public CategoryRepository(AppDbContext context)
+    {
+        _context = context;
+    }
 
-    public async Task<List<Category>> GetAllAsync() => await _context.Categories.ToListAsync();
+    public async Task<List<Category>> GetAllAsync()
+    {
+        return await _context.Categories.ToListAsync();
+    }
 
-    public async Task<Category?> GetByIdAsync(int id) => await _context.Categories.FindAsync(id);
+    public async Task<Category?> GetByIdAsync(Guid id)
+    {
+        return await _context.Categories.FindAsync(id);
+    }
+
+    public async Task<Category?> GetByIdAsync(int id)
+    {
+        return await _context.Categories.FindAsync(id);
+    }
 
     public async Task AddAsync(Category category)
     {
@@ -20,14 +34,18 @@ public class CategoryRepository : ICategoryRepository
         await _context.SaveChangesAsync();
     }
 
-    public Task UpdateAsync(Category category)
+    public async Task UpdateAsync(Category category)
     {
-        throw new NotImplementedException();
+        _context.Categories.Update(category);
+        await _context.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(Guid id)
+    public async Task DeleteAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var category = await _context.Categories.FindAsync(id);
+        if (category is null) return;
+        _context.Categories.Remove(category);
+        await _context.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(int id)
@@ -36,5 +54,12 @@ public class CategoryRepository : ICategoryRepository
         if (category is null) return;
         _context.Categories.Remove(category);
         await _context.SaveChangesAsync();
+    }
+
+    public async Task<List<Category>> SearchByNameAsync(string name)
+    {
+        return await _context.Categories
+            .Where(c => c.Name.Contains(name))
+            .ToListAsync();
     }
 }
