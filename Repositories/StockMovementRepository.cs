@@ -16,7 +16,13 @@ public class StockMovementRepository : IStockMovementRepository
         _context.StockMovements.Add(movement);
         await _context.SaveChangesAsync();
     }
-
+    
+    public async Task<List<StockMovement>> GetByProductIdAsync(int productId)
+    {
+        return await _context.StockMovements
+            .Where(sm => sm.ProductId == productId)
+            .ToListAsync();
+    }
     public async Task UpdateAsync(StockMovement movement)
     {
         _context.StockMovements.Update(movement);
