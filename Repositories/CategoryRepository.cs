@@ -1,3 +1,4 @@
+using InventoryApi.Model.DTOs;
 using InventoryApi.Model.Entities;
 using InventoryApi.Model.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -18,9 +19,9 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories.ToListAsync();
     }
 
-    public async Task<Category?> GetByIdAsync(Guid id)
+    public Task<Category?> GetByIdAsync(Guid id)
     {
-        return await _context.Categories.FindAsync(id);
+        throw new NotImplementedException();
     }
 
     public async Task<Category?> GetByIdAsync(int id)
@@ -28,23 +29,26 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories.FindAsync(id);
     }
 
-    public async Task AddAsync(Category category)
+    public async Task<Category> AddAsync(Category category)
     {
-        _context.Categories.Add(category);
+        _context.Categories.Add(category); 
         await _context.SaveChangesAsync();
+        return category;
+    }
+
+    public Task UpdateAsync(CategoryDTO category)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task DeleteAsync(Guid id)
+    {
+        throw new NotImplementedException();
     }
 
     public async Task UpdateAsync(Category category)
     {
         _context.Categories.Update(category);
-        await _context.SaveChangesAsync();
-    }
-
-    public async Task DeleteAsync(Guid id)
-    {
-        var category = await _context.Categories.FindAsync(id);
-        if (category is null) return;
-        _context.Categories.Remove(category);
         await _context.SaveChangesAsync();
     }
 
