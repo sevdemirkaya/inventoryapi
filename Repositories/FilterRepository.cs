@@ -1,44 +1,66 @@
+using InventoryApi.Model.DTO;
 using InventoryApi.Model.Entities;
 using InventoryApi.Model.Interfaces;
 
-namespace InventoryApi.DataAccess.Repositories;
-
-public class FilterRepository : IFilterRepository
+namespace InventoryApi.Business.Services
 {
-    private readonly AppDbContext _context;
-
-    public FilterRepository(AppDbContext context)
+    public class FilterService : IFilterService
     {
-        _context = context;
-    }
+        private readonly IFilterRepository _repository;
 
-    public Task<IEnumerable<Filter>> GetAllAsync()
-    {
-        throw new NotImplementedException();
-    }
+        public FilterService(IFilterRepository repository)
+        {
+            _repository = repository;
+        }
 
-    public Task<Filter?> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<IEnumerable<FilterDTO>> GetAllAsync()
+        {
+            var filters = await _repository.GetAllAsync();
+            return filters.Select(f => new FilterDTO
+            {
+                FilterType = f.filterType,
+                Column = f.Column,
+                Value = f.Value
+            });
+        }
 
-    Task IFilterRepository.
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<FilterDTO?> GetByIdAsync(int id)
+        {
+            var filter = await _repository.GetByIdAsync(id);
+            if (filter is null) return null;
 
-    public Task<Filter> UpdateAsync(Filter filter)
-    {
-        throw new NotImplementedException();
-    }
+            return new FilterDTO
+            {
+                FilterType = filter.filterType,
+                Column = filter.Column,
+                Value = filter.Value
+            };
+        }
 
-    public Task<Filter> DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task AddAsync(FilterDTO dto)
+        {
+            var filter = new Filter
+            {
+                FilterType = dto.FilterType,
+                Column = dto.Column,
+                Value = dto.Value
+            };
 
-    Filter IFilterRepository.
-    {
-        throw new NotImplementedException();
+            await _repository.AddAsync(filter);
+        }
+
+        public async Task UpdateAsync(int id, FilterDTO dto)
+        {
+            var existing = await _repository.GetByIdAsync(id);
+            if (existing is null) return;
+
+            existing.FilterType = dto.FilterType;
+            existing.Column = dto.Column;
+            existing.Value = dto.Value;
+
+            await _repository.UpdateAsync(existing);
+        }
+
+        public async Task DeleteAsync(int id) => await _repository.DeleteAsync(id);
     }
 }
