@@ -36,4 +36,9 @@ public class StockMovementRepository : IStockMovementRepository
         _context.StockMovements.Remove(movement);
         await _context.SaveChangesAsync();
     }
+
+    public Task<List<StockMovement>> Search(Filter filter)
+    {
+        throw new NotImplementedException();
+    }
 }

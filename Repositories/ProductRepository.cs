@@ -30,4 +30,14 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
     }
+
+    public Task<List<Product>> Search(Filter filter)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<IEnumerable<Product>> SearchAsync(Filter filter)
+    {
+        throw new NotImplementedException();
+    }
 }

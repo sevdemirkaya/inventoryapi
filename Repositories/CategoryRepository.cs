@@ -46,6 +46,11 @@ public class CategoryRepository : ICategoryRepository
         throw new NotImplementedException();
     }
 
+    public Task<List<Category>> Search(Filter filter)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task UpdateAsync(Category category)
     {
         _context.Categories.Update(category);
