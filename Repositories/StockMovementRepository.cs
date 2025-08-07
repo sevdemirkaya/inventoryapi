@@ -19,9 +19,9 @@ public class StockMovementRepository : IStockMovementRepository
     
     public async Task<List<StockMovement>> GetByProductIdAsync(int productId)
     {
-        return await _context.StockMovements
-            .Where(sm => sm.ProductId == productId)
-            .ToListAsync();
+        IQueryable<StockMovement> query = _context.StockMovements;
+        query = query.Where(sm => sm.ProductId == productId);
+        return await query.ToListAsync();
     }
     public async Task UpdateAsync(StockMovement movement)
     {
