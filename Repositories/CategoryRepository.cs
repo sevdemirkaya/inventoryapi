@@ -19,16 +19,14 @@ public class CategoryRepository : ICategoryRepository
         return await _context.Categories.ToListAsync();
     }
 
-    public Task<Category?> GetByIdAsync(Guid id)
+    public Task<Category?> GetByIdAsync(string id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Category?> GetByIdAsync(int id)
-    {
-        return await _context.Categories.FindAsync(id);
-    }
 
+
+ 
     public async Task<Category> AddAsync(Category category)
     {
         _context.Categories.Add(category); 
@@ -41,10 +39,7 @@ public class CategoryRepository : ICategoryRepository
         throw new NotImplementedException();
     }
 
-    public Task DeleteAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
+  
 
     public Task<List<Category>> Search(Filter filter)
     {
@@ -57,7 +52,7 @@ public class CategoryRepository : ICategoryRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id)
+    public async Task DeleteAsync(string id)
     {
         var category = await _context.Categories.FindAsync(id);
         if (category is null) return;
@@ -67,8 +62,7 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<List<Category>> SearchByNameAsync(string name)
     {
-        return await _context.Categories
+     return await _context.Categories
             .Where(c => c.Name.Contains(name))
-            .ToListAsync();
-    }
-}
+            .ToListAsync();}}
+    
