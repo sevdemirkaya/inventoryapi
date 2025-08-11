@@ -64,7 +64,7 @@ public class ProductRepository : IProductRepository
     }
 
 
-    private bool SearchInName(string name, string filterName)
+    public bool SearchInName(string name, string filterName)
     {
         return name.Contains(filterName);
     }

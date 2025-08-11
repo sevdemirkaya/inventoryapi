@@ -17,11 +17,14 @@ public class StockMovementRepository : IStockMovementRepository
         await _context.SaveChangesAsync();
     }
     
-    public async Task<List<StockMovement>> GetByProductIdAsync(int productId)
+    public async Task<List<StockMovement>> GetByProductIdAsync(string productId)
     {
-        IQueryable<StockMovement> query = _context.StockMovements;
-        query = query.Where(sm => sm.ProductId == productId);
-        return await query.ToListAsync();
+        if (string.IsNullOrWhiteSpace(productId))
+            return new List<StockMovement>();
+
+        return await _context.StockMovements
+            .Where(sm => sm.ProductId == productId)
+            .ToListAsync();
     }
     public async Task UpdateAsync(StockMovement movement)
     {
