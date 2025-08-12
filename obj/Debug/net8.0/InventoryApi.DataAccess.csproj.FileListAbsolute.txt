@@ -1,4 +1,5 @@
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.deps.json
+/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.runtimeconfig.json
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.dll
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.pdb
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.Model.dll
@@ -8,11 +9,10 @@
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.AssemblyInfoInputs.cache
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.AssemblyInfo.cs
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.csproj.CoreCompileInputs.cache
+/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.sourcelink.json
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/Inventor.4D62547B.Up2Date
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.dll
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/refint/InventoryApi.DataAccess.dll
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.pdb
-/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/ref/InventoryApi.DataAccess.dll
-/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/bin/Debug/net8.0/InventoryApi.DataAccess.runtimeconfig.json
 /Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.genruntimeconfig.cache
-/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/InventoryApi.DataAccess.sourcelink.json
+/Users/misuverse/Desktop/apps/InventoryApi/InventoryApi.DataAccess/obj/Debug/net8.0/ref/InventoryApi.DataAccess.dll
