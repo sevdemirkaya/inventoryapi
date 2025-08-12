@@ -9,8 +9,8 @@ public class ProductRepository : IProductRepository
     private readonly AppDbContext _context;
     public ProductRepository(AppDbContext context) => _context = context;
 
-    public async Task<IEnumerable<Product>> GetAllAsync() => await _context.Products.ToListAsync();
-    public async Task<Product?> GetByIdAsync(string id) => await _context.Products.FindAsync(id);
+    public async Task<List<Product>> GetAllAsync() => await _context.Products.ToListAsync();
+    public async Task<Product> GetByIdAsync(string id) => await _context.Products.FindAsync(id);
     public async Task AddAsync(Product product)
     {
         _context.Products.Add(product);
@@ -31,7 +31,7 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<List<Product>> GetProductByNameAndCategoryId(string productName, string categoryId)
+    public async Task<List<Product>> GetProductsByNameAndCategoryId(string productName, string categoryId)
     {
         if (string.IsNullOrWhiteSpace(productName) || !int.TryParse(categoryId, out var catId))
             return new List<Product>();
@@ -48,28 +48,20 @@ public class ProductRepository : IProductRepository
         
     }
 
-    public async Task<IEnumerable<Product>> GetProductByName(string filterName)
+    public async Task<List<Product>> GetProductsByName(string filterName)
     {
         return await _context.Products
-            .Where(p => !string.IsNullOrEmpty(p.Name) &&
+            .Where(p => !string.IsNullOrWhiteSpace(p.Name) &&
                         p.Name.Contains(filterName))
             .ToListAsync();
     }
 
-    public async Task<IEnumerable<Product>> GetProductByCategoryId(string filterCategoryId)
+    public async Task<List<Product>> GetProductsByCategoryId(string filterCategoryId)
     {
         return await _context.Products
             .Where(p => p.CategoryId.ToString() == filterCategoryId)
             .ToListAsync();
     }
-
-
-    public bool SearchInName(string name, string filterName)
-    {
-        return name.Contains(filterName);
-    }
     
-
-
     
 }
