@@ -44,15 +44,13 @@ public class StockMovementRepository : IStockMovementRepository
 {
     IQueryable<StockMovement> q = _context.StockMovements.AsNoTracking();
 
-    // 1) İsim (opsiyonel)
     if (!string.IsNullOrWhiteSpace(filter.Name))
         q = q.Where(sm => EF.Functions.Like(sm.Name, $"%{filter.Name}%"));
 
-    // 2) CategoryId (Filter.CategoryId string; entity int) 
     if (!string.IsNullOrWhiteSpace(filter.CategoryId) && int.TryParse(filter.CategoryId, out var catId))
         q = q.Where(sm => sm.CategoryId == catId);
 
-    // 3) Tarih aralığı (EndDate dahil olacak şekilde)
+
     if (filter.StartDate.HasValue)
         q = q.Where(sm => sm.Date >= filter.StartDate.Value);
 
@@ -62,7 +60,7 @@ public class StockMovementRepository : IStockMovementRepository
         q = q.Where(sm => sm.Date < endExclusive);
     }
 
-    // 4) Generic Column/Value filtresi
+   
     if (!string.IsNullOrWhiteSpace(filter.Column) && !string.IsNullOrWhiteSpace(filter.Value))
     {
         switch (filter.Column.Trim().ToLowerInvariant())
@@ -90,7 +88,7 @@ public class StockMovementRepository : IStockMovementRepository
                     q = q.Where(sm => sm.CategoryId == cid);
                 break;
 
-            // gerekirse ek kolonlar: "date", "datefrom", "dateto" vs.
+      
         }
     }
 
@@ -99,7 +97,7 @@ public class StockMovementRepository : IStockMovementRepository
     // local helper
     static bool TryParseMovementType(string value, out MovementType mt)
     {
-        // "in"/"out" veya "1"/"0" destekle
+  
         mt = MovementType.In;
         if (string.IsNullOrWhiteSpace(value)) return false;
 
