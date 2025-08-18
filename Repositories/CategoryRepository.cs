@@ -19,14 +19,13 @@ public class CategoryRepository : ICategoryRepository
 
     public async Task<Category?> GetByIdAsync(string id)
     {
-        // Id PK ve string ise FindAsync gayet uygun;
-        // değilse FirstOrDefaultAsync kullanın.
-        var entity = await _context.Categories.FindAsync(id);
-        return entity; // AsNoTracking gerekmez; Find change tracker'a bağlı
-    }
-
+        return await _context.Categories
+            .AsNoTracking()
+            .FirstOrDefaultAsync(c => c.Id == id);
+    }   
     public async Task<Category> AddAsync(Category category)
     {
+        category.Id = Guid.NewGuid().ToString();
         _context.Categories.Add(category);
         await _context.SaveChangesAsync();
         return category;
@@ -63,7 +62,7 @@ public class CategoryRepository : ICategoryRepository
         if (!string.IsNullOrWhiteSpace(filter.Name))
             q = q.Where(c => EF.Functions.Like(c.Name, $"%{filter.Name}%"));
 
-        // Filter genişleyecekse (CreatedAt, UpdatedAt vs.) burada ekleyin.
+      
 
         return await q.ToListAsync();
     }

@@ -9,8 +9,14 @@ public class ProductRepository : IProductRepository
     private readonly AppDbContext _context;
     public ProductRepository(AppDbContext context) => _context = context;
 
-    public async Task<List<Product>> GetAllAsync() => await _context.Products.ToListAsync();
-    public async Task<Product> GetByIdAsync(string id) => await _context.Products.FindAsync(id);
+    public async Task<List<Product>> GetAllAsync()
+    {
+        return await _context.Products.ToListAsync();
+    }
+    public async Task<Product> GetByIdAsync(string id)
+    {
+        return await _context.Products.FindAsync(id);
+    }
     public async Task AddAsync(Product product)
     {
         _context.Products.Add(product);
@@ -25,7 +31,7 @@ public class ProductRepository : IProductRepository
 
     public async Task DeleteAsync(string id)
     {
-        var product = await _context.Products.FindAsync(id);
+        Product product = await GetByIdAsync(id);
         if (product is null) return;
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
@@ -33,19 +39,12 @@ public class ProductRepository : IProductRepository
 
     public async Task<List<Product>> GetProductsByNameAndCategoryId(string productName, string categoryId)
     {
-        if (string.IsNullOrWhiteSpace(productName) || !int.TryParse(categoryId, out var catId))
-            return new List<Product>();
-
-        var name = productName.Trim();
-
+        
         return await _context.Products
             .AsNoTracking()
-            .Where(p => p.CategoryId == catId
-                        && !string.IsNullOrEmpty(p.Name)
-                        && EF.Functions.Like(p.Name, $"%{name}%"))
+            .Where(p => p.CategoryId == categoryId && p.Name.Contains(productName))
             .OrderBy(p => p.Name)
             .ToListAsync();
-        
     }
 
     public async Task<List<Product>> GetProductsByName(string filterName)
